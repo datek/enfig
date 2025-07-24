@@ -1,0 +1,12 @@
+name: publish
+inputs:
+  repository-url:
+    required: true
+    description: The destination package repository URL
+runs:
+  using: "composite"
+  steps:
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: ${REPOSITORY_URL}

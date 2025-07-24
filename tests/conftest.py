@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pytest import fixture
 
 from enfig.base import BaseConfig
@@ -9,7 +11,7 @@ def base_config_class(key_volume) -> type[BaseConfig]:
         VOLUME: int
         FIELD_WITH_DEFAULT_VALUE: str = "C"
         NON_MANDATORY_FIELD: str = None  # type: ignore
-        TYPED_NON_MANDATORY_FIELD: str | None = None
+        TYPED_NON_MANDATORY_FIELD: Optional[str] = None
 
     return VolumeConfig
 

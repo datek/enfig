@@ -1,4 +1,4 @@
-from enum import Enum, StrEnum
+from enum import Enum
 
 from enfig.bool_type import _Bool
 
@@ -11,7 +11,7 @@ class InstantiationForbiddenError(EnfigError):
     pass
 
 
-class ConfigAttributeErrorType(StrEnum):
+class ConfigAttributeErrorType(str, Enum):
     NOT_SET = "Not set"
     INVALID_VALUE = "Invalid value"
 
@@ -35,7 +35,8 @@ class ConfigAttributeError(EnfigError):
     def __str__(self) -> str:
         required_type = bool if self.required_type is _Bool else self.required_type
         return (
-            f"{self.attribute_name}: {self.error_type}, required type: `{required_type.__name__}`"
+            f"{self.attribute_name}: {self.error_type}, "
+            f"required type: `{required_type.__name__}`"
         )
 
 
