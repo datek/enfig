@@ -35,4 +35,4 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/publish
         with:
-          repository-url: ${REPOSITORY_URL}
+          repository-url: ${{ env.REPOSITORY_URL }}

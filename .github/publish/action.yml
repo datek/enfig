@@ -11,6 +11,6 @@ runs:
         path: ./dist
     - name: Publish package distributions to PyPI
       # https://github.com/pypa/gh-action-pypi-publish/issues/290
-      uses: pypa/gh-action-pypi-publish@v1.11.0
+      uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        repository-url: ${REPOSITORY_URL}
+        repository-url: ${{ inputs.repository-url }}
