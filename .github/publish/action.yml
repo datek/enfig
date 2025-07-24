@@ -6,6 +6,9 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - uses: actions/download-artifact@v4
+      with:
+        path: ./dist
     - name: Publish package distributions to PyPI
       # https://github.com/pypa/gh-action-pypi-publish/issues/290
       uses: pypa/gh-action-pypi-publish@v1.11.0
