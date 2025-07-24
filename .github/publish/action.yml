@@ -7,6 +7,7 @@ runs:
   using: "composite"
   steps:
     - name: Publish package distributions to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
+      # https://github.com/pypa/gh-action-pypi-publish/issues/290
+      uses: pypa/gh-action-pypi-publish@v1.11.0
       with:
         repository-url: ${REPOSITORY_URL}
