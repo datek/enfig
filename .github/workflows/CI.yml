@@ -52,9 +52,8 @@ jobs:
       - name: Load version into env
         shell: bash
         run: |
-          commit_nr=$(git rev-list --all --count)
-          echo "Commit Nr.: ${commit_nr}"
-          echo "RELEASE_VERSION=0.1.0${{ github.head_ref }}${commit_nr}" >> $GITHUB_ENV
+          dev_version=$(date '+%Y%m%d%H%M%S')
+          echo "RELEASE_VERSION=0.1.0${{ github.head_ref }}${dev_version}" >> $GITHUB_ENV
 
       - uses: ./.github/build
         with:
