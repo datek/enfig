@@ -2,6 +2,9 @@
 Source = "https://github.com/datek/enfig"
 
 [project]
+authors = [
+    {name = "Attila Dudás", email = "attila.dudas@protonmail.com"},
+]
 name = "enfig"
 version = "0.1.0"
 description = "Lean, zero dependency environment parsing library."
