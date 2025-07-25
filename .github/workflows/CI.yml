@@ -35,11 +35,8 @@ jobs:
           just test
           coverage xml
 
-      - uses: codecov/codecov-action@v5
+      - uses: coverallsapp/github-action@v2
         if: ${{ contains(matrix.python-version, '3.13') }}
-        with:
-          fail_ci_if_error: true
-          token: ${{ secrets.CODECOV_TOKEN }}
 
   build:
     name: Build
