@@ -3,10 +3,15 @@ on:
     branches:
       - master
 
+  push:
+    branches:
+      - master
+
 name: CI
 
 jobs:
   test:
+    name: Test
     strategy:
       matrix:
         python-version: ["3.13", "3.12", "3.11", "3.10", "3.9"]
@@ -37,6 +42,8 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
   build:
+    name: Build
+    if: ${{ github.event_name == 'pull_request' }}
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -54,6 +61,8 @@ jobs:
           package-version: ${RELEASE_VERSION}
 
   pypi-publish:
+    name: Publish to test-pypi
+    if: ${{ github.event_name == 'pull_request' }}
     needs: [test, build]
     runs-on: ubuntu-latest
     # Specifying a GitHub environment is optional, but strongly encouraged
