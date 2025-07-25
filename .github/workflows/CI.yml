@@ -35,11 +35,8 @@ jobs:
           just test
           coverage xml
 
-      - uses: codecov/codecov-action@v5
+      - uses: coverallsapp/github-action@v2
         if: ${{ contains(matrix.python-version, '3.13') }}
-        with:
-          fail_ci_if_error: true
-          token: ${{ secrets.CODECOV_TOKEN }}
 
   build:
     name: Build
@@ -53,7 +50,7 @@ jobs:
         shell: bash
         run: |
           dev_version=$(date '+%Y%m%d%H%M%S')
-          echo "RELEASE_VERSION=0.1.0${{ github.head_ref }}${dev_version}" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=0.1.0dev${dev_version}" >> $GITHUB_ENV
 
       - uses: ./.github/build
         with:
