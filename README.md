@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/DAtek/enfig/graph/badge.svg?token=IJOcBg0LZ8)](https://codecov.io/gh/DAtek/enfig)
+[![Coverage Status](https://coveralls.io/repos/github/datek/enfig/badge.svg?branch=master)](https://coveralls.io/github/datek/enfig?branch=master)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 <a href="https://github.com/psf/black/blob/main/LICENSE"><img alt="License: MIT" src="https://black.readthedocs.io/en/stable/_static/license.svg"></a>
 
