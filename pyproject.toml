@@ -1,12 +1,14 @@
+[project.urls]
+Source = "https://github.com/datek/enfig"
+
 [project]
 name = "enfig"
 version = "0.1.0"
-description = "Add your description here"
+description = "Lean, zero dependency environment parsing library."
 readme = "README.md"
 requires-python = ">=3.9"
-GitHub = "https://github.com/DAtek/enfig"
 license = "MIT"
-
+license-files = ["LICENSE"]
 dependencies = []
 
 [dependency-groups]
