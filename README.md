@@ -50,8 +50,8 @@ class Config(enfig.BaseConfig):
     COLOR: str
     TEMPERATURE: int
     WEIGHT: float
-    AMOUNT: int = None
-    DISABLE_AUTOTUNE: bool = None
+    AMOUNT: int | None = None
+    DISABLE_AUTOTUNE: bool | None = None
 
 
 try:
