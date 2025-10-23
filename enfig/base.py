@@ -1,5 +1,6 @@
 from collections.abc import Iterator
 from os import getenv
+from sys import version_info
 from typing import Any, get_args
 
 from enfig.bool_type import _Bool
@@ -48,24 +49,50 @@ class _Variable:
         return None
 
 
-class _ConfigMeta(type):
-    def __new__(mcs, name: str, bases: tuple, namespace: dict):
-        for key, type_ in namespace.get("__annotations__", {}).items():
-            namespace[key] = _Variable(type_, namespace.get(key, ...))
+if version_info.minor < 14:
 
-        for base in bases:
-            if not isinstance(base, _ConfigMeta):
-                continue
+    class _ConfigMeta(type):
+        def __new__(mcs, name: str, bases: tuple, namespace: dict):
+            for key, type_ in namespace.get("__annotations__", {}).items():
+                namespace[key] = _Variable(type_, namespace.get(key, ...))
 
-            for variable in base:
-                namespace[variable.name] = variable
+            for base in bases:
+                if not isinstance(base, _ConfigMeta):
+                    continue
 
-        return super().__new__(mcs, name, bases, namespace)
+                for variable in base:
+                    namespace[variable.name] = variable
 
-    def __iter__(cls) -> Iterator[_Variable]:
-        return (
-            value for value in cls.__dict__.values() if isinstance(value, _Variable)
-        )
+            return super().__new__(mcs, name, bases, namespace)
+
+        def __iter__(cls) -> Iterator[_Variable]:
+            return (
+                value for value in cls.__dict__.values() if isinstance(value, _Variable)
+            )
+
+else:
+    from annotationlib import Format, get_annotate_from_class_namespace  # type: ignore
+
+    class _ConfigMeta(type):  # type: ignore
+        def __new__(mcs, name: str, bases: tuple, namespace: dict):
+            get_annotations = get_annotate_from_class_namespace(namespace)
+            annotations = get_annotations(Format.VALUE) if get_annotations else {}
+            for key, type_ in annotations.items():
+                namespace[key] = _Variable(type_, namespace.get(key, ...))
+
+            for base in bases:
+                if not isinstance(base, _ConfigMeta):
+                    continue
+
+                for variable in base:
+                    namespace[variable.name] = variable
+
+            return super().__new__(mcs, name, bases, namespace)
+
+        def __iter__(cls) -> Iterator[_Variable]:
+            return (
+                value for value in cls.__dict__.values() if isinstance(value, _Variable)
+            )
 
 
 class BaseConfig(metaclass=_ConfigMeta):
